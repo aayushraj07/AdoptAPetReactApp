@@ -9,10 +9,34 @@ const petfinder = pf({
 });
 
 class App extends React.Component {
-  componentDidMount() {
-    const promise = petfinder.breed.list({ animal: "dog" });
+  constructor(props) {
+    super(props);
 
-    promise.then(console.log, console.error);
+    this.state = {
+      pets: []
+    };
+  }
+
+  componentDidMount() {
+    petfinder.pet
+      .find({ output: "full", location: "Seattle, WA" })
+      .then(data => {
+        let pets;
+
+        if (data.petfinder.pets && data.petfinder.pets.pet) {
+          //this conditon checks whether it has pets or not.
+          if (Array.isArray(data.petfinder.pets.pet)) {
+            //this condition checks that  if the gathered data from API is in array or not
+            pets = data.petfinder.pets.pet;
+          } else {
+            pets = [data.petfinder.pets.pet]; //if the data is not in array then it will make one , array
+          }
+        } else {
+          pets = []; //else will remain as it is , empty
+        }
+        this.setState({ pets });
+        // console.log(data);
+      });
   }
   render() {
     return (
