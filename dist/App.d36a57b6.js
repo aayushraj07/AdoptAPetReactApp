@@ -22653,13 +22653,15 @@ function (_React$Component) {
         var pets;
 
         if (data.petfinder.pets && data.petfinder.pets.pet) {
+          //this conditon checks whether it has pets or not.
           if (Array.isArray(data.petfinder.pets.pet)) {
+            //this condition checks that  if the gathered data from API is in array or not
             pets = data.petfinder.pets.pet;
           } else {
-            pets = [data.petfinder.pets.pet];
+            pets = [data.petfinder.pets.pet]; //if the data is not in array then it will make one , array
           }
         } else {
-          pets = [];
+          pets = []; //else will remain as it is , empty
         }
 
         _this2.setState({
@@ -22671,19 +22673,22 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Adopt Me!"), _react.default.createElement(_Pet.default, {
-        name: "Scooby",
-        animal: "dog",
-        breed: "Havanese"
-      }), _react.default.createElement(_Pet.default, {
-        name: "Pepper",
-        animal: "bird",
-        breed: "Cockatiel"
-      }), _react.default.createElement(_Pet.default, {
-        name: "Doink",
-        animal: "animal",
-        breed: "Mixed"
-      }));
+      return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Adopt Me!"), _react.default.createElement("div", null, this.state.pets.map(function (pet) {
+        var breed;
+
+        if (Array.isArray(pet.breeds.breed)) {
+          breed = pet.breeds.breed.join(", ");
+        } else {
+          breed = pet.breeds.breed;
+        }
+
+        return _react.default.createElement(_Pet.default, {
+          key: pet.id,
+          animal: pet.animal,
+          name: pet.name,
+          breed: breed
+        });
+      })));
     }
   }]);
 
@@ -22718,7 +22723,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44511" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43855" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
