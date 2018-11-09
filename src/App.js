@@ -17,7 +17,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      loaction: "Seattle ,WA",
+      location: "Seattle ,WA",
       animal: "",
       breed: "",
       breeds: [],
@@ -36,8 +36,8 @@ class App extends React.Component {
   handleAnimalChange = event => {
     this.setState(
       {
-        animal: event.target.value,
-        breed: ""
+        animal: event.target.value
+        // breed: ""
       },
       this.getBreeds
     );
@@ -73,6 +73,11 @@ class App extends React.Component {
       <div>
         <header>
           <Link to="/">Adopt Me!</Link>
+          <Link to="/search-params">
+            <span aria-label="search" role="img">
+              🔍
+            </span>
+          </Link>
         </header>
         <Provider value={this.state}>
           <Router>
